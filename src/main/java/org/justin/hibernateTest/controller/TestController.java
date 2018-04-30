@@ -7,13 +7,12 @@ import java.util.Set;
 
 import javax.annotation.Resource;
 import javax.persistence.EntityManager;
-import javax.persistence.ParameterMode;
-import javax.persistence.Query;
 import javax.persistence.StoredProcedureQuery;
 
 import org.justin.hibernateTest.dao.CustomerDao;
 import org.justin.hibernateTest.dao.DnSpDao;
 import org.justin.hibernateTest.dao.DnSpResultDao;
+import org.justin.hibernateTest.dao.DnSpResultDao2;
 import org.justin.hibernateTest.dao.EntityTable2Dao;
 import org.justin.hibernateTest.dao.EntityTable3Dao;
 import org.justin.hibernateTest.dao.PermesssionDao;
@@ -23,6 +22,8 @@ import org.justin.hibernateTest.entity.EntityTable2;
 import org.justin.hibernateTest.entity.EntityTable3;
 import org.justin.hibernateTest.entity.Permesssion;
 import org.justin.hibernateTest.entity.SdshippkitemQuery;
+import org.justin.hibernateTest.entity.SdshippkitemResult;
+import org.justin.hibernateTest.entity.SdshippkitemResult2;
 import org.justin.hibernateTest.service.TestHibernateService;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -54,6 +55,9 @@ public class TestController {
 	
 	@Resource
 	DnSpResultDao dnSpResultDao;
+	
+	@Resource
+	DnSpResultDao2 dnSpResultDao2;
 	@Resource
 	DnSpDao dnSpDao;
 	
@@ -96,23 +100,13 @@ public class TestController {
 	}
 	@GetMapping("/queryDN4")
 	@ResponseBody
-	public List<Object>   queryDN4(String dn){
-		
-//		List<List<?>>   list =  dnSpResultDao.execSpQueryDn1(dn);
-		List<Object>   list= new ArrayList<>();
-		StoredProcedureQuery  query =manager.createStoredProcedureQuery("querydn3");
-		query.registerStoredProcedureParameter("dninput", String.class, ParameterMode.IN);
-		query.setParameter("dninput", "123");
-		
-		while(query.hasMoreResults()){
-			Object obj =  query.getResultList();
-			System.out.println(obj);
-			list.add(obj);
-		}
-		Object obj =  query.getResultList();
-		System.out.println(obj);
-		list.add(obj);
-		
+	public List<List<?>>   queryDN4(String dn){
+		List<List<?>> list = new ArrayList<>();
+		List<SdshippkitemResult> list1 = dnSpResultDao.execSpQueryDn(dnSpResultDao.TYPE, dn);
+		List<SdshippkitemResult2> list2 = dnSpResultDao2.execSpQueryDn(dnSpResultDao2.TYPE, dn);
+		list.add(list1);
+		list.add(list2);
+//		list = dnSpResultDao.execSpQueryDn0(dnSpResultDao.TYPEA, dn);
 		return list;
 	}
 

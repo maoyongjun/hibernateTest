@@ -1,20 +1,11 @@
 package org.justin.hibernateTest.entity;
 
 import java.io.Serializable;
-import java.sql.ResultSet;
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedStoredProcedureQueries;
-import javax.persistence.NamedStoredProcedureQuery;
-import javax.persistence.ParameterMode;
-import javax.persistence.StoredProcedureParameter;
-import javax.persistence.Table;
-
-import org.hibernate.type.descriptor.sql.VarcharTypeDescriptor;
 
 @Entity
 public class SdshippkitemResult implements Serializable{
