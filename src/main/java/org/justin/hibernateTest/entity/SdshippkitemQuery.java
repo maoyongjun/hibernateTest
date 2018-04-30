@@ -1,6 +1,8 @@
 package org.justin.hibernateTest.entity;
 
 import java.io.Serializable;
+import java.sql.ResultSet;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,43 +29,25 @@ import org.hibernate.type.descriptor.sql.VarcharTypeDescriptor;
                             name = "dninput", //参数需要和存储过程对上
                             type = String.class)
             }
-        ),  @NamedStoredProcedureQuery(
-                name = "getDnSp1", 
-                procedureName = "querydn1", 
-                resultClasses = { SdshippkitemQuery.class },
-                parameters = {
-                        @StoredProcedureParameter(
-                                mode = ParameterMode.IN, 
-                                name = "dninput", 
-                                type = String.class)
-                }
-            )
-    ,  @NamedStoredProcedureQuery(
-            name = "getDnSp5", 
-            procedureName = "querydn", 
-            resultClasses = { SdshippkitemQuery.class },
-            parameters = {
-                    @StoredProcedureParameter(
-                            mode = ParameterMode.IN, 
-                            name = "dninput"
-                            , type = Long.class)
-            }
         )
-    ,  @NamedStoredProcedureQuery(
-            name = "getDnSp6", 
-            procedureName = "querydn", 
-            resultClasses = { SdshippkitemQuery.class },
-            parameters = {
-                    @StoredProcedureParameter(
-                            mode = ParameterMode.IN, 
-                            name = "dninput"
-                            , type = Long.class),
-                    @StoredProcedureParameter(
-                            mode = ParameterMode.IN, 
-                            name = "dninput1"
-                            , type = Long.class)
-            }
-        )
+//    ,  @NamedStoredProcedureQuery(
+//                name = "getDnSp1", 
+//                procedureName = "querydn1", 
+//                resultClasses = { SdshippkitemQuery.class },
+//                parameters = {
+//                        @StoredProcedureParameter(
+//                                mode = ParameterMode.IN, 
+//                                name = "dninput", 
+//                                type = String.class
+//                                ), 
+//                        @StoredProcedureParameter(
+//                                        mode = ParameterMode.OUT, 
+//                                        name = "outs", 
+//                                        type = List.class
+//                                        )
+//                }
+//            )
+    
 })
 public class SdshippkitemQuery implements Serializable{
 	@Id

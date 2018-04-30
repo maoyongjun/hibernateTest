@@ -7,10 +7,13 @@ import java.util.Set;
 
 import javax.annotation.Resource;
 import javax.persistence.EntityManager;
+import javax.persistence.ParameterMode;
+import javax.persistence.Query;
 import javax.persistence.StoredProcedureQuery;
 
 import org.justin.hibernateTest.dao.CustomerDao;
 import org.justin.hibernateTest.dao.DnSpDao;
+import org.justin.hibernateTest.dao.DnSpResultDao;
 import org.justin.hibernateTest.dao.EntityTable2Dao;
 import org.justin.hibernateTest.dao.EntityTable3Dao;
 import org.justin.hibernateTest.dao.PermesssionDao;
@@ -50,6 +53,8 @@ public class TestController {
 	EntityTable3Dao table3Dao;
 	
 	@Resource
+	DnSpResultDao dnSpResultDao;
+	@Resource
 	DnSpDao dnSpDao;
 	
 	@Resource
@@ -86,34 +91,32 @@ public class TestController {
 	@GetMapping("/queryDN3")
 	@ResponseBody
 	public List<SdshippkitemQuery> queryDN3(String dn){
-		
-		return dnSpDao.execSpQueryDn3(dn);
+		 dnSpDao.execSpQueryDn3(dn);
+		 return null;
 	}
 	@GetMapping("/queryDN4")
 	@ResponseBody
-	public List<SdshippkitemQuery> queryDN4(String dn){
+	public List<Object>   queryDN4(String dn){
 		
-		return dnSpDao.execSpQueryDn4(dn);
+//		List<List<?>>   list =  dnSpResultDao.execSpQueryDn1(dn);
+		List<Object>   list= new ArrayList<>();
+		StoredProcedureQuery  query =manager.createStoredProcedureQuery("querydn3");
+		query.registerStoredProcedureParameter("dninput", String.class, ParameterMode.IN);
+		query.setParameter("dninput", "123");
+		
+		while(query.hasMoreResults()){
+			Object obj =  query.getResultList();
+			System.out.println(obj);
+			list.add(obj);
+		}
+		Object obj =  query.getResultList();
+		System.out.println(obj);
+		list.add(obj);
+		
+		return list;
 	}
+
 	
-	@GetMapping("/queryDN5")
-	@ResponseBody
-	public List<SdshippkitemQuery> queryDN5(String dn){
-		
-		return dnSpDao.execSpQueryDn5(dn);
-	}
-	@GetMapping("/queryDN6")
-	@ResponseBody
-	public List<SdshippkitemQuery> queryDN6(String dn){
-		
-		return dnSpDao.execSpQueryDn6(Long.parseLong(dn));
-	}
-	@GetMapping("/queryDN7")
-	@ResponseBody
-	public List<SdshippkitemQuery> queryDN7(String dn){
-		
-		return dnSpDao.execSpQueryDn7(Long.parseLong(dn),10l);
-	}
 	@GetMapping("/save1")
 	@ResponseBody
 	public Customer testSave1(String custerName, String p1,String p2){
