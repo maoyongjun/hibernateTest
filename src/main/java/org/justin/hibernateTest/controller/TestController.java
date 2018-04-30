@@ -6,8 +6,11 @@ import java.util.List;
 import java.util.Set;
 
 import javax.annotation.Resource;
+import javax.persistence.EntityManager;
+import javax.persistence.StoredProcedureQuery;
 
 import org.justin.hibernateTest.dao.CustomerDao;
+import org.justin.hibernateTest.dao.DnSpDao;
 import org.justin.hibernateTest.dao.EntityTable2Dao;
 import org.justin.hibernateTest.dao.EntityTable3Dao;
 import org.justin.hibernateTest.dao.PermesssionDao;
@@ -16,6 +19,7 @@ import org.justin.hibernateTest.entity.EntityTable1;
 import org.justin.hibernateTest.entity.EntityTable2;
 import org.justin.hibernateTest.entity.EntityTable3;
 import org.justin.hibernateTest.entity.Permesssion;
+import org.justin.hibernateTest.entity.SdshippkitemQuery;
 import org.justin.hibernateTest.service.TestHibernateService;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,11 +49,71 @@ public class TestController {
 	@Resource
 	EntityTable3Dao table3Dao;
 	
+	@Resource
+	DnSpDao dnSpDao;
+	
+	@Resource
+	EntityManager manager;
+	
 	@GetMapping
 	public String test(){
 		return "test";
 	}
+	//通过调用实体类中的声明查询，不使用接口
+	@GetMapping("/queryDN")
+	@ResponseBody
+	public List<SdshippkitemQuery> queryDN(String dn){
+		StoredProcedureQuery query =manager.createNamedStoredProcedureQuery("getDnSp");
+		query.setParameter("dninput", "abc");
+		query.execute();
+		return query.getResultList();
+	}
 	
+	
+	@GetMapping("/queryDN1")
+	@ResponseBody
+	public List<SdshippkitemQuery> queryDN1(String dn){
+		
+		return dnSpDao.execSpQueryDn1(dn);
+	}
+	@GetMapping("/queryDN2")
+	@ResponseBody
+	public List<SdshippkitemQuery> queryDN2(String dn){
+		
+		return dnSpDao.execSpQueryDn2(dn);
+	}
+	
+	@GetMapping("/queryDN3")
+	@ResponseBody
+	public List<SdshippkitemQuery> queryDN3(String dn){
+		
+		return dnSpDao.execSpQueryDn3(dn);
+	}
+	@GetMapping("/queryDN4")
+	@ResponseBody
+	public List<SdshippkitemQuery> queryDN4(String dn){
+		
+		return dnSpDao.execSpQueryDn4(dn);
+	}
+	
+	@GetMapping("/queryDN5")
+	@ResponseBody
+	public List<SdshippkitemQuery> queryDN5(String dn){
+		
+		return dnSpDao.execSpQueryDn5(dn);
+	}
+	@GetMapping("/queryDN6")
+	@ResponseBody
+	public List<SdshippkitemQuery> queryDN6(String dn){
+		
+		return dnSpDao.execSpQueryDn6(Long.parseLong(dn));
+	}
+	@GetMapping("/queryDN7")
+	@ResponseBody
+	public List<SdshippkitemQuery> queryDN7(String dn){
+		
+		return dnSpDao.execSpQueryDn7(Long.parseLong(dn),10l);
+	}
 	@GetMapping("/save1")
 	@ResponseBody
 	public Customer testSave1(String custerName, String p1,String p2){
