@@ -1,5 +1,6 @@
 package org.justin.hibernateTest.entity.systemuser;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -15,7 +16,7 @@ import javax.persistence.Table;
 */
 @Entity
 @Table(name = "SystemRole")
-public class Role {
+public class Role implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;

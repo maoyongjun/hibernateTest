@@ -16,4 +16,11 @@ public interface SystemUserDao extends JpaRepository<SystemUser, Long> {
 	
 	@Query(value="SELECT t FROM SystemUser t LEFT JOIN t.subNameList  WHERE t.username=:username ")
 	public List<SystemUser> findSystemUserAndSubnameByUserName(@Param("username")String username);
+	
+	
+	@Query(value="SELECT t FROM SystemUser t LEFT JOIN t.permissions  WHERE t.username=:username ")
+	public List<SystemUser> findSystemUserAndPermissionByUserName(@Param("username")String userName);
+	
+	@Query(value="SELECT f FROM Permission t LEFT JOIN t.users  f WHERE t.permissionName=:pname ")
+	public List<SystemUser> findUserByPermissionName(@Param("pname")String pname); 
 }

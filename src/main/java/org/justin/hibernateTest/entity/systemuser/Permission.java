@@ -1,11 +1,15 @@
 package org.justin.hibernateTest.entity.systemuser;
 
+import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 /**
@@ -14,7 +18,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "SystemPermission")
-public class Permission {
+public class Permission implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
@@ -26,6 +30,9 @@ public class Permission {
 	private String permissionName;
 	
 	private String permissionDesciption;
+	
+	@ManyToMany(mappedBy="permissions")
+	private Set<SystemUser> users=new HashSet<SystemUser>();
 
 	public long getId() {
 		return id;
@@ -65,6 +72,14 @@ public class Permission {
 
 	public void setPermissionDesciption(String permissionDesciption) {
 		this.permissionDesciption = permissionDesciption;
+	}
+
+	public Set<SystemUser> getUsers() {
+		return users;
+	}
+
+	public void setUsers(Set<SystemUser> users) {
+		this.users = users;
 	}
 	
 	

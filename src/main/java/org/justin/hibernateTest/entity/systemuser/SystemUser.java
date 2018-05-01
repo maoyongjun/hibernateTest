@@ -11,6 +11,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -23,7 +26,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 */
 @Entity
 @Table(name = "SystemUser")
-@JsonIgnoreProperties(value = { "subNameList" })
+@JsonIgnoreProperties(value = { "subNameList","permissions" })
 public class SystemUser implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -43,6 +46,16 @@ public class SystemUser implements Serializable{
 
 	@OneToMany(mappedBy="user",fetch=FetchType.EAGER,cascade=CascadeType.ALL)
     private Set<SystemSubName> subNameList = new HashSet<SystemSubName>();
+	
+	@ManyToMany(cascade=CascadeType.ALL) 
+    @JoinTable(  
+                name="SystemUserPermission",  
+                joinColumns=  
+                    @JoinColumn(name="userId", referencedColumnName="id"),//当前表里的id  
+                inverseJoinColumns=  
+                    @JoinColumn(name="permissionId", referencedColumnName="id")//与此相对应的表里的id  
+                )  
+	private Set<Permission> permissions = new HashSet<Permission>(); 
 	
 	public long getId() {
 		return id;
@@ -106,6 +119,14 @@ public class SystemUser implements Serializable{
 
 	public void setSubCount(Long subCount) {
 		this.subCount = subCount;
+	}
+
+	public Set<Permission> getPermissions() {
+		return permissions;
+	}
+
+	public void setPermissions(Set<Permission> permissions) {
+		this.permissions = permissions;
 	}
 	
 	

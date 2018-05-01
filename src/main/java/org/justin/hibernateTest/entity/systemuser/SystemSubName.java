@@ -1,5 +1,6 @@
 package org.justin.hibernateTest.entity.systemuser;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
@@ -21,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @Table(name = "SystemSubNamer")
 
-public class SystemSubName {
+public class SystemSubName implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
