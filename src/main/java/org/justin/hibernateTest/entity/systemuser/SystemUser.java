@@ -16,6 +16,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -43,6 +44,9 @@ public class SystemUser implements Serializable{
 	private Date   lastEditDt;
 	
 	private Long subCount;
+	
+	@Transient
+	private String subnames;
 
 	@OneToMany(mappedBy="user",fetch=FetchType.EAGER,cascade=CascadeType.ALL)
     private Set<SystemSubName> subNameList = new HashSet<SystemSubName>();
@@ -51,8 +55,22 @@ public class SystemUser implements Serializable{
 	@JoinColumn(name="userId",nullable=true)
 	private Set<Role> roles = new HashSet<Role>();
 	
+	public SystemUser(){
+		
+	} 
+	
+	public SystemUser(String userName,Role role ){
+		this.username=userName;
+		subnames="";
+		this.roles.add(role);
+		for(Role sub:roles){
+			subnames+=sub.getRoleName()+",";
+		}
+		
+	} 
 	
 	public Set<Role> getRoles() {
+		System.out.println(roles.toString());
 		return roles;
 	}
 
@@ -140,6 +158,14 @@ public class SystemUser implements Serializable{
 
 	public void setPermissions(Set<Permission> permissions) {
 		this.permissions = permissions;
+	}
+
+	public String getSubnames() {
+		return subnames;
+	}
+
+	public void setSubnames(String subnames) {
+		this.subnames = subnames;
 	}
 	
 	

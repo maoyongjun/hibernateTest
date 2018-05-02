@@ -68,6 +68,11 @@ public class Role implements Serializable{
 	public void setRoleDesciption(String roleDesciption) {
 		this.roleDesciption = roleDesciption;
 	}
+
+	@Override
+	public String toString() {
+		return roleName;
+	}
 	
 	
 }
