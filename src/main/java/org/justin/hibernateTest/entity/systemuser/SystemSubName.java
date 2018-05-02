@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 * 创建时间：2018年5月1日 上午8:37:13
 */
 @Entity
-@Table(name = "SystemSubNamer")
+@Table(name = "TestSystemSubNamer")
 
 public class SystemSubName implements Serializable{
 	@Id

@@ -15,7 +15,7 @@ import javax.persistence.Table;
 * 创建时间：2018年5月1日 上午8:03:44
 */
 @Entity
-@Table(name = "SystemRolepermission")
+@Table(name = "TestSystemRolepermission")
 public class RolePermission implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

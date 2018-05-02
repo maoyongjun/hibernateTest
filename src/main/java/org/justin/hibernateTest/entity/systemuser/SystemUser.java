@@ -25,7 +25,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 * 创建时间：2018年5月1日 上午7:46:15
 */
 @Entity
-@Table(name = "SystemUser")
+@Table(name = "TestSystemUser")
 @JsonIgnoreProperties(value = { "subNameList","permissions" })
 public class SystemUser implements Serializable{
 	@Id
@@ -47,9 +47,22 @@ public class SystemUser implements Serializable{
 	@OneToMany(mappedBy="user",fetch=FetchType.EAGER,cascade=CascadeType.ALL)
     private Set<SystemSubName> subNameList = new HashSet<SystemSubName>();
 	
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name="userId",nullable=true)
+	private Set<Role> roles = new HashSet<Role>();
+	
+	
+	public Set<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
+
 	@ManyToMany(cascade=CascadeType.ALL) 
     @JoinTable(  
-                name="SystemUserPermission",  
+                name="TestSystemUserPermission",  
                 joinColumns=  
                     @JoinColumn(name="userId", referencedColumnName="id"),//当前表里的id  
                 inverseJoinColumns=  

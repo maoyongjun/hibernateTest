@@ -17,7 +17,7 @@ import javax.persistence.Table;
  * @version 1.0 创建时间：2018年5月1日 上午8:02:51
  */
 @Entity
-@Table(name = "SystemPermission")
+@Table(name = "TestSystemPermission")
 public class Permission implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

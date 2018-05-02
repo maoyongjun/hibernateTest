@@ -15,7 +15,7 @@ import javax.persistence.Table;
 * 创建时间：2018年5月1日 上午8:04:00
 */
 @Entity
-@Table(name = "SystemUserRole")
+@Table(name = "TestSystemUserRole")
 public class UserRole implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

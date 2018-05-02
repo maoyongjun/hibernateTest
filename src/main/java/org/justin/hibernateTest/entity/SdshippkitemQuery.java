@@ -17,7 +17,7 @@ import javax.persistence.Table;
 import org.hibernate.type.descriptor.sql.VarcharTypeDescriptor;
 
 @Entity
-@Table(name="test7")
+//@Table(name="test7")
 @NamedStoredProcedureQueries({
     @NamedStoredProcedureQuery(
             name = "getDnSp", 
