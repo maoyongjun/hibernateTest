@@ -60,7 +60,7 @@ public class OneToManyController {
 	
 	@GetMapping("/user/findUserRoleByUserName")
 	@ResponseBody
-	public List<SystemUser> findSystemUserAndRole(String userName){
+	public List<Role> findSystemUserAndRole(String userName){
 		return  systemUserDao.findUserAndRoleByUserName(userName);
 	}
 	
