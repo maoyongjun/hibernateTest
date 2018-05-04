@@ -97,6 +97,9 @@ public class SystemUser implements Serializable{
 	}
 
 	public String getUsername() {
+		for(Role sub:roles){
+			subnames+=sub.getRoleName()+",";
+		}
 		return username;
 	}
 

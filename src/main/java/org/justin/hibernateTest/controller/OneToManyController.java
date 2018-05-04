@@ -55,6 +55,7 @@ public class OneToManyController {
 		SystemUser user =  systemUserDao.findOne(userId);
 		user.getRoles().add(role);
 		user.setLastEditDt(new Date());
+		user.getUsername();
 		return systemUserDao.save(user);
 	}
 	
