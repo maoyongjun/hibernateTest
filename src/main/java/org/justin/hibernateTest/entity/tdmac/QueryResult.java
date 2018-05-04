@@ -14,47 +14,47 @@ public class QueryResult {
 	
 //	@EmbeddedId
 //	private QueryResultKey id;
-	@Id@Column(insertable=false,updatable=false)
+	@Id@Column(name="SYSSERIALNO",insertable=false,updatable=false)
 	String	sysserialno	;
-	@Id@Column(insertable=false,updatable=false)
+	@Id@Column(name="RUNNUMBER",insertable=false,updatable=false)
 	Integer	RunNumber	;
-	@Id@Column(insertable=false,updatable=false)
+	@Column(name="FAILNUMBER",insertable=false,updatable=false)
 	Integer	FailNumber	;
-	@Id@Column(insertable=false,updatable=false)
+	@Column(name="PRODLINE",insertable=false,updatable=false)
 	String	ProdLine	;
-	@Id@Column(insertable=false,updatable=false)
+	@Column(name="STATIONNAME",insertable=false,updatable=false)
 	String	StationName	;
-	@Id@Column(insertable=false,updatable=false)
+	@Column(name="TESTSTATUS",insertable=false,updatable=false)
 	String	TestStatus	;
-	@Id@Column(insertable=false,updatable=false)
+	@Column(name="FAILREASON",insertable=false,updatable=false)
 	String	FailReason	;
-	@Id@Column(insertable=false,updatable=false)
+	@Column(name="CREATEBY",insertable=false,updatable=false)
 	String	CreateBy	;
-	@Id@Column(insertable=false,updatable=false)
+	@Column(name="CREATEDT",insertable=false,updatable=false)
 	Date	CreateDT	;
-	@Id@Column(insertable=false,updatable=false)
+	@Column(name="LASTEDITBY",insertable=false,updatable=false)
 	String	LastEditBy	;
-	@Id@Column(insertable=false,updatable=false)
+	@Id@Column(name="LASTEDITDT",insertable=false,updatable=false)
 	Date	LastEditDT	;
-	@Id@Column(insertable=false,updatable=false)
+	@Column(name="TESTSUITENAME",insertable=false,updatable=false)
 	String	TestSuiteName	;
-	@Id@Column(insertable=false,updatable=false)
+	@Column(name="LOCATIONSERIALNUMBER",insertable=false,updatable=false)
 	String	LocationSerialNumber	;
-	@Id@Column(insertable=false,updatable=false)
+	@Column(name="STATIONMACHINENAME",insertable=false,updatable=false)
 	String	StationMachineName	;
-	@Id@Column(insertable=false,updatable=false)
+	@Column(name="TESTCOMPLETETIME",insertable=false,updatable=false)
 	Date	TestCompleteTime	;
-	@Id@Column(insertable=false,updatable=false)
+	@Column(name="FIELD1",insertable=false,updatable=false)
 	String	Field1	;
-	@Id@Column(insertable=false,updatable=false)
+	@Column(name="FIELD2",insertable=false,updatable=false)
 	String	Field2	;
-	@Id@Column(insertable=false,updatable=false)
+	@Column(name="FIELD3",insertable=false,updatable=false)
 	String	Field3	;
-	@Id@Column(insertable=false,updatable=false)
+	@Column(name="FIELD4",insertable=false,updatable=false)
 	String	Field4	;
-	@Id@Column(insertable=false,updatable=false)
+	@Column(name="FIELD5",insertable=false,updatable=false)
 	String	Field5	;
-	@Id@Column(insertable=false,updatable=false)
+	@Column(name="FIELD6",insertable=false,updatable=false)
 	String	Field6	;
 	public String getSysserialno() {
 		return sysserialno;
