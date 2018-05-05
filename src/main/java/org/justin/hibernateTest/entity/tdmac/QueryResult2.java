@@ -8,9 +8,9 @@ import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.Table;
 @Entity
-@Table(name = "mfsystestresult")
+@Table(name = "mfsystestresult_log")
 @IdClass(QueryResultKey.class)	
-public class QueryResult {
+public class QueryResult2 {
 	
 //	@EmbeddedId
 //	private QueryResultKey id;

@@ -7,9 +7,10 @@ public class TdMacEntity {
 	public static final int MACTYPE=1;
 	public static final int TDTYPE=2;
 	public static final int FWTYPE=3;
+	public static final int BMCTYPE=4;
 	private Long snid ;
 	private String sn;
-	private List<TestResultProperty> properties;
+	private List<TestResultProperty> properties = new ArrayList<TestResultProperty>();
 	private List<TdMacEntity> subEntity = new ArrayList<TdMacEntity>();
 	public Long getSnid() {
 		return snid;
@@ -32,6 +33,8 @@ public class TdMacEntity {
 			property= new Td();
 		}else if (FWTYPE == type){
 			property= new Fw();
+		}else if(BMCTYPE==type){
+			property = new Bmc();
 		}
 		return property;
 	}
@@ -112,7 +115,26 @@ public class TdMacEntity {
 		
 
 	}
-	
+private class Bmc extends Sn{
+		
+		private String bmc;
+		@Override
+		public void setTestMsg(String msg) {
+			this.bmc=msg;
+		}
+		@Override
+		public String getTestMsg() {
+			return bmc;
+		}
+		public String getBmc() {
+			return bmc;
+		}
+		public void setBmc(String bmc) {
+			this.bmc = bmc;
+		}
+		
+
+	}
 	private class Fw extends Sn{
 		private String fw;
 		private String td;

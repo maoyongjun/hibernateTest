@@ -23,8 +23,8 @@ public class QueryResultKey implements Serializable
 	Integer	RunNumber	;
 //	@Column(name="FAILNUMBER")
 //	Integer	FailNumber	;
-//	@Column(name="STATIONNAME")
-//	String	StationName	;
+	@Column(name="STATIONNAME")
+	String	StationName	;
 //	@Column(name="TESTSTATUS")
 //	String	TestStatus	;
 //	@Column(name="FAILREASON")
@@ -64,6 +64,12 @@ public class QueryResultKey implements Serializable
 	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+	public String getStationName() {
+		return StationName;
+	}
+	public void setStationName(String stationName) {
+		StationName = stationName;
 	}
 	
 }

@@ -5,8 +5,10 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.justin.hibernateTest.dao.QueryResult2Dao;
 import org.justin.hibernateTest.dao.QueryResultDao;
 import org.justin.hibernateTest.entity.tdmac.QueryResult;
+import org.justin.hibernateTest.entity.tdmac.QueryResult2;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -18,6 +20,9 @@ public class TdMacController {
 	@Resource
 	QueryResultDao queryResultDao;
 	
+	@Resource
+	QueryResult2Dao queryResult2Dao;
+	
 	@GetMapping("/td/query")
 	@ResponseBody
 	public  List<QueryResult> getQueryResult(String sn){
@@ -26,6 +31,13 @@ public class TdMacController {
 		
 	}
 	
+	@GetMapping("/td/query2")
+	@ResponseBody
+	public  List<QueryResult2> getQueryResult2(String sn){
+		 List<QueryResult2> result = queryResult2Dao.findResultBySysserialno(sn);
+		return result;
+		
+	}
 
 	@GetMapping("/td/queryAll")
 	@ResponseBody
