@@ -1,12 +1,19 @@
 package org.justin.hibernateTest.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.justin.hibernateTest.dao.MfsyscserialDao;
+import org.justin.hibernateTest.dao.MfsysproductDao;
 import org.justin.hibernateTest.dao.QueryResult2Dao;
 import org.justin.hibernateTest.dao.QueryResultDao;
+import org.justin.hibernateTest.entity.tdmac.Mfsyscserial;
+import org.justin.hibernateTest.entity.tdmac.MfsyscserialKey;
+import org.justin.hibernateTest.entity.tdmac.Mfsysproduct;
 import org.justin.hibernateTest.entity.tdmac.QueryResult;
 import org.justin.hibernateTest.entity.tdmac.QueryResult2;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -23,12 +30,31 @@ public class TdMacController {
 	@Resource
 	QueryResult2Dao queryResult2Dao;
 	
+	@Resource
+	MfsysproductDao mfsysproductDao;
+	
+	@Resource
+	MfsyscserialDao mfsyscserialDao;
+	
 	@GetMapping("/td/query")
 	@ResponseBody
-	public  List<QueryResult> getQueryResult(String sn){
+	public  List<QueryResult> getQueryResult(String sn) throws ParseException{
+		System.out.println(mfsysproductDao.findOne("1A21Q8E00-600-G-7456-0003-X1"));
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+		Date lasteditdt = sdf.parse("2016-12-18 08:06:00.000");
+		MfsyscserialKey cskey = new MfsyscserialKey("~7CE0000009","~1500070A",lasteditdt);
+		Mfsyscserial cs = mfsyscserialDao.findOne(cskey);
+		System.out.println(cs);
+		System.out.println(sdf.format(cs.getLasteditdt()));
 		 List<QueryResult> result = queryResultDao.findResultBySysserialno(sn);
 		return result;
 		
+	}
+	
+	@GetMapping("/td/queryMfsysproduct")
+	@ResponseBody
+	public List<Mfsyscserial> getQueryMfsyscs(String sn){
+		return mfsyscserialDao.findModelBySysserialno(sn);
 	}
 	
 	@GetMapping("/td/query2")
