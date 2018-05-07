@@ -4,14 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TdMacEntity {
-	public static final int MACTYPE=1;
-	public static final int TDTYPE=2;
-	public static final int FWTYPE=3;
-	public static final int BMCTYPE=4;
 	private Long snid ;
 	private String sn;
 	private List<TestResultProperty> properties = new ArrayList<TestResultProperty>();
 	private List<TdMacEntity> subEntity = new ArrayList<TdMacEntity>();
+	
+	public static enum Type {
+		MAC,
+		TD,
+		FW,
+		BMC
+	}
 	public Long getSnid() {
 		return snid;
 	}
@@ -25,15 +28,15 @@ public class TdMacEntity {
 		this.sn = sn;
 	}
 	
-	public TestResultProperty getInstance(int  type){
+	public TestResultProperty getInstance(Type  type){
 		TestResultProperty property =null;
-		if(MACTYPE==type){
+		if(Type.MAC==type){
 			property= new Mac();
-		}else if(TDTYPE == type){
+		}else if(Type.TD == type){
 			property= new Td();
-		}else if (FWTYPE == type){
+		}else if (Type.FW  == type){
 			property= new Fw();
-		}else if(BMCTYPE==type){
+		}else if(Type.BMC==type){
 			property = new Bmc();
 		}
 		return property;

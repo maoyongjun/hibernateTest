@@ -2,6 +2,8 @@ package org.justin.hibernateTest.entity.tdmac;
 
 import java.util.List;
 
+import org.justin.hibernateTest.entity.tdmac.TdMacEntity.Type;
+
 public class TdMacUtil {
 	
 	public List<TestResultProperty> addTdsFromFiled2(TdMacEntity entity,String filed2){
@@ -12,7 +14,7 @@ public class TdMacUtil {
 		tds = tds.replaceAll("ETH<|ETH\\{|ETH\\(|>", "");
 		String[] tdArray = tds.split(",");
 		for(String temp:tdArray){
-			TestResultProperty p = entity.getInstance(TdMacEntity.TDTYPE);
+			TestResultProperty p = entity.getInstance(Type.TD);
 			p.setTestMsg(temp);
 			entity.getProperties().add(p);
 		}
@@ -23,7 +25,7 @@ public class TdMacUtil {
 		int fromIndex=filed2.indexOf("BMC");
 		int toIndex=filed2.length();
 		String bmc=filed2.substring(fromIndex, toIndex);
-		TestResultProperty p = entity.getInstance(TdMacEntity.BMCTYPE);
+		TestResultProperty p = entity.getInstance(Type.BMC);
 		bmc = bmc.toUpperCase().replaceAll("BMC<|BMC\\(|BMC\\{|>", "");
 		p.setTestMsg(bmc);
 		entity.getProperties().add(p);

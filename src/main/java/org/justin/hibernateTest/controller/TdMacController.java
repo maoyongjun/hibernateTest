@@ -3,7 +3,9 @@ package org.justin.hibernateTest.controller;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.annotation.Resource;
 
@@ -17,6 +19,7 @@ import org.justin.hibernateTest.entity.tdmac.Mfsysproduct;
 import org.justin.hibernateTest.entity.tdmac.QueryResult;
 import org.justin.hibernateTest.entity.tdmac.QueryResult2;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.data.domain.Example;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -50,17 +53,32 @@ public class TdMacController {
 		return result;
 		
 	}
+//	@GetMapping("/td/queryMfsysproducts")
+//	@ResponseBody
+//	public List<Mfsysproduct> getQueryMfsysprocutBySns(String sns){
+//		return mfsysproductDao.findModelBySysserialno(sns);
+//	}
 	
 	@GetMapping("/td/queryMfsysproduct")
 	@ResponseBody
-	public List<Mfsyscserial> getQueryMfsyscs(String sn){
-		return mfsyscserialDao.findModelBySysserialno(sn);
+	public Mfsysproduct getQueryMfsyscs(String sn){
+		Mfsysproduct f = new Mfsysproduct();
+		f.setSysserialno(sn);
+		Example<Mfsysproduct> e = Example.of(f);
+		f = mfsysproductDao.findOne(e);
+		Mfsyscserial csn = new Mfsyscserial();
+		csn.setSysserialno(sn);
+		csn.setCategoryname("L010");
+		Example<Mfsyscserial> e1 = Example.of(csn);
+		List<Mfsyscserial> csns = mfsyscserialDao.findAll(e1);
+		f.setSns(new HashSet<>(csns));
+		return f;
 	}
 	
 	@GetMapping("/td/query2")
 	@ResponseBody
 	public  List<QueryResult2> getQueryResult2(String sn){
-		 List<QueryResult2> result = queryResult2Dao.findResultBySysserialno(sn);
+		List<QueryResult2> result = queryResult2Dao.findResultBySysserialno(sn);
 		return result;
 		
 	}
